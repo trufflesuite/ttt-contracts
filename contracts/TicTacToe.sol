@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/security/PullPayment.sol";
 
 contract TicTacToe is PullPayment {
   event GameStarted(uint game_id);
-  event GameWon(address winner, uint amount);
+  event GameWon(uint game_id, address winner, uint amount);
 
   struct Game {
     uint jackpot;
@@ -47,7 +47,7 @@ contract TicTacToe is PullPayment {
 
     _asyncTransfer(winner_address, jackpot);
 
-    emit GameWon(winner_address, jackpot);
+    emit GameWon(game_id, winner_address, jackpot);
   }
 
   function getWinners() public view returns(address[] memory) {

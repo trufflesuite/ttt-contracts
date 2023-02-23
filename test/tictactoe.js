@@ -57,6 +57,8 @@ contract("TicTacToe", (accounts) => {
       value: 100,
     });
 
+    await ticTacToeInstance.endGame(0, 0);
+
     await truffleAssert.reverts(
       ticTacToeInstance.endGame(0, 0),
       "cannot end a game which is already ended"
@@ -78,7 +80,7 @@ contract("TicTacToe", (accounts) => {
   it("should end a game if one exists", async () => {
     const ticTacToeInstance = await TicTacToe.deployed();
 
-    const tx = await ticTacToeInstance.endGame(1, 0);
+    const tx = await ticTacToeInstance.endGame(1, 1);
 
     truffleAssert.eventEmitted(tx, "GameWon");
   });
@@ -86,13 +88,13 @@ contract("TicTacToe", (accounts) => {
   it("should allow withdrawal if an address has winnings", async () => {
     const ticTacToeInstance = await TicTacToe.deployed();
 
-    const oldBalance = accounts[0].balance;
-    await ticTacToeInstance.withdrawPayments(accounts[0]);
-    const newBalance = accounts[0].balance;
+    const oldBalance = await web3.eth.getBalance(accounts[1]);
+    await ticTacToeInstance.withdrawPayments(accounts[1]);
+    const newBalance = await web3.eth.getBalance(accounts[1]);
 
     assert.equal(
-      oldBalance,
-      newBalance,
+      parseInt(oldBalance) + 100,
+      parseInt(newBalance),
       "winner balance changed an unanticipated amount after withdrawal"
     );
   });
