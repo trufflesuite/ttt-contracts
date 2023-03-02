@@ -1,3 +1,3 @@
-# Truffle + Unity Tic Tac Toe Game
+# Web3 Tic Tac Toe with Consensys! (Smart Contracts)
 
-Use Truffle and Unity to create a tic tac toe game with a custom smart contract containing betting and payout features!
+This repo is 1 of 2 and contains the smart contracts powering [Consensys' Web3 Tic Tac Toe game](https://github.com/trufflesuite/ttt-unity). You'll probably need both this repo and the Unity game if you plan to modify the game's functionality.
