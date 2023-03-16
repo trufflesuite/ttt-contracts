@@ -15,9 +15,6 @@ contract TicTacToe is PullPayment {
 
   Game[] games;
 
-  address[] public winners;
-  mapping(address => uint) public leaderboard;
-
   function startGame(address payout_x, address payout_o) public payable {
     // must have some value attached for jackpot
     require(msg.value > 0, "jackpot must be greater than 0");
@@ -48,9 +45,5 @@ contract TicTacToe is PullPayment {
     _asyncTransfer(winner_address, jackpot);
 
     emit GameWon(game_id, winner_address, jackpot);
-  }
-
-  function getWinners() public view returns(address[] memory) {
-    return winners;
   }
 }
